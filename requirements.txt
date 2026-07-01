@@ -1,0 +1,28 @@
+# requirements.txt — EEG/SEEG aperiodic-exponent analysis pipeline
+# Package versions used for the analysis and figures; tested on Python 3.10+.
+# Core signal/statistics versions match the paper's Supplementary Methods
+# (MNE 1.11.0, statsmodels 0.14.6, pingouin 0.6.0, specparam 2.0.0).
+#
+# Install:   pip install -r requirements.txt
+# Note: specparam is a pre-release — use  pip install --pre -r requirements.txt
+#       (or keep the exact "==2.0.0rc6" pin below).
+# Loosen "==" to ">=" if you need more flexibility across machines.
+
+# ── Core EEG / signal processing ──
+mne==1.11.0
+yasa==0.6.5                 # automated sleep staging (interictal N2 extraction)
+specparam==2.0.0rc6        # FOOOF aperiodic fit (new SpectralModel API)
+
+# ── Scientific computing ──
+numpy==2.3.5
+pandas==2.3.3
+scipy==1.17.0
+
+# ── Statistics ──
+statsmodels==0.14.6        # linear mixed models (LMM), ANCOVA
+pingouin==0.6.0            # paired/Bayesian t-tests, effect sizes
+
+# ── Plotting & I/O ──
+matplotlib==3.10.7
+openpyxl==3.1.5            # read/write .xlsx (Engel outcomes, supplementary tables)
+tqdm==4.67.1               # progress bars
