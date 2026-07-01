@@ -29,24 +29,11 @@ warnings.filterwarnings('ignore')
 #  CONFIGURATION
 # ═══════════════════════════════════════════════════════════════════
 
-# Auto-detect data directory by checking for a known data file
+# Data directory shared with the figure panels; override via the APERIODIC_DATA
+# environment variable. Data are not distributed — see data/README.md and the
+# paper's Data availability statement.
 SCRIPT_DIR = Path(__file__).resolve().parent
-_candidates = [
-    Path("."),  # 新位置（项目内）
-    Path("."),  # 旧位置（兜底）
-    SCRIPT_DIR.parent,                                    # One level up from panels/
-    SCRIPT_DIR,                                           # Same dir as script
-    Path('/mnt/project'),                                 # Claude environment
-]
-DATA_DIR = next((p for p in _candidates
-                 if (p / 'seeg_contact_results.csv').exists()), None)
-if DATA_DIR is None:
-    raise FileNotFoundError(
-        f"Cannot locate data files. Searched:\n"
-        + "\n".join(f"  {p}" for p in _candidates)
-        + "\nPlace seeg_contact_results.csv (and other data) in one of "
-        "these directories, or edit _candidates in this script."
-    )
+from shared_config import DATA_ROOT as DATA_DIR
 OUTPUT = SCRIPT_DIR / 'Supplementary_Tables.xlsx'
 ASM_FILE = DATA_DIR / 'ASM_regimen.csv'  # Per-patient ASM data (user-filled)
 
