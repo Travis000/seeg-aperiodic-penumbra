@@ -1,0 +1,37 @@
+# ── Patient / derived data — never commit ──
+data/*
+!data/README.md
+*.edf
+*.EDF
+*.csv
+*.xlsx
+*.xls
+*.npz
+*.fif
+*.set
+*.mat
+
+# ── Figure / table outputs ──
+output/
+*.png
+*.pdf
+*.tif
+*.tiff
+*.eps
+*.svg
+!docs/**/*.png
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# ── OS / editor ──
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
