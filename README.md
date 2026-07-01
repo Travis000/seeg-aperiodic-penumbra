@@ -9,7 +9,7 @@ for scalp EEG and intracranial SEEG, and reproduces the paper's statistics (line
 mixed-effects models, distance-gradient modelling, ANCOVA, label-permutation test,
 cross-modal correlation) and figures.
 
-> Suggested repository name: `seeg-aperiodic-penumbra`
+> Repository: https://github.com/Travis000/seeg-aperiodic-penumbra
 
 ## Repository layout
 
@@ -20,9 +20,8 @@ cross-modal correlation) and figures.
 │   └── seeg_aperiodic.py      #   SEEG:       same pipeline per contact + SOZ/distance mapping
 ├── figures/                   # statistics + figure generation (runnable on derived data)
 │   ├── shared_config.py       #   palette, typography, channel layouts, data loaders, DATA_ROOT
-│   ├── fig1*.py fig2*.py …     #   one module per figure panel (each exposes plot_panel)
-│   ├── compose_figures.py     #   assemble Figures 1–4 (+ breach control)
-│   ├── export_panels.py       #   export every panel as a standalone vector/raster file
+│   ├── fig1*.py fig2*.py …     #   one module per panel: computes the panel's statistic
+│   │                           #   (LMM, ANCOVA, permutation, FDR, …) and renders it
 │   └── generate_supplementary_tables.py, generate_supp_table_S6.py
 ├── data/                      # (empty) — see data/README.md and Data availability
 ├── requirements.txt
@@ -67,13 +66,16 @@ request, subject to institutional data-sharing agreements).
    python analysis/seeg_aperiodic.py
    ```
 
-3. Reproduce the figures and supplementary tables (runs on the derived files):
+3. Reproduce the statistics, panels, and supplementary tables (runs on the derived files).
+   Each `fig*.py` computes its statistic and renders its panel when run standalone, e.g.:
 
    ```bash
    cd figures
-   python compose_figures.py        # Figures 1–4
-   python export_panels.py          # individual panels
+   python fig2b_gradient.py         # distance-gradient LMM
+   python fig4b_regression.py       # outcome ANCOVA
+   python fig4_perm.py              # label-permutation test
    python generate_supplementary_tables.py
+   python generate_supp_table_S6.py
    ```
 
 ## Method summary
